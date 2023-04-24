@@ -124,32 +124,3 @@ jobs:
           context: .
           push: true
           tags: ${{vars.DOCKER_REGISTRY_HOST}}/${{vars.DOCKER_REGISTRY_REPOSITORY_NAME}}:${{ needs.compile.outputs.release_version }}
-
-  publish_to_npm_registry:
-    name: Publish to npm registry
-    needs: [compile]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download release
-        uses: robinraju/release-downloader@v1.7
-        with:
-          tag: ${{ needs.compile.outputs.release_version }}
-          tarBall: true
-      - name: Unpack release
-        run: tar -xzf ./${{github.event.repository.name}}-${{ needs.compile.outputs.release_version }}.tar.gz
-      - name: Remove tarball
-        run: rm ./${{github.event.repository.name}}-${{ needs.compile.outputs.release_version }}.tar.gz
-      - name: Move the files to the current directory
-        run: |
-          shopt -s dotglob
-          mv ./${{github.event.repository.owner.login}}-${{github.event.repository.name}}-*/* ./
-          shopt -u dotglob
-          rm -rf ./${{github.event.repository.owner.login}}-${{github.event.repository.name}}-*/
-      - name: Download dist
-        uses: actions/download-artifact@v3
-        with:
-          name: dist
-          path: dist
-      - name: Publish to npm registry
-        run: |
-          npm publish --registry=${{vars.NPM_REGISTRY_URL}} --//$(echo -n ${{vars.NPM_REGISTRY_URL}} | sed 's/^[^\/]*\/\///'):_authToken=${{secrets.NPM_REGISTRY_ACCESS_TOKEN}}

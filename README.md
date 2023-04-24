@@ -1,4 +1,4 @@
-# nodejs-app-template
+# astro-app-template
 
 This is a template for a Node.js TypeScript project.
 
