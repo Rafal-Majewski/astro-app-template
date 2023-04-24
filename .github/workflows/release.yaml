@@ -46,8 +46,8 @@ jobs:
     outputs:
       release_version: ${{ steps.remember_release_version.outputs.release_version }}
 
-  compile:
-    name: Compile
+  build:
+    name: Build
     needs: [release]
     runs-on: ubuntu-latest
     steps:
@@ -74,9 +74,9 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-      - name: Compile
+      - name: Build
         run: |
-          npm run compile
+          npm run build
       - name: Upload dist
         uses: actions/upload-artifact@v3
         with:
@@ -87,18 +87,18 @@ jobs:
 
   publish_to_docker_registry:
     name: Publish to Docker registry
-    needs: [compile]
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: Download release
         uses: robinraju/release-downloader@v1.7
         with:
-          tag: ${{ needs.compile.outputs.release_version }}
+          tag: ${{ needs.build.outputs.release_version }}
           tarBall: true
       - name: Unpack release
-        run: tar -xzf ./${{github.event.repository.name}}-${{ needs.compile.outputs.release_version }}.tar.gz
+        run: tar -xzf ./${{github.event.repository.name}}-${{ needs.build.outputs.release_version }}.tar.gz
       - name: Remove tarball
-        run: rm ./${{github.event.repository.name}}-${{ needs.compile.outputs.release_version }}.tar.gz
+        run: rm ./${{github.event.repository.name}}-${{ needs.build.outputs.release_version }}.tar.gz
       - name: Move the files to the current directory
         run: |
           shopt -s dotglob
@@ -123,4 +123,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{vars.DOCKER_REGISTRY_HOST}}/${{vars.DOCKER_REGISTRY_REPOSITORY_NAME}}:${{ needs.compile.outputs.release_version }}
+          tags: ${{vars.DOCKER_REGISTRY_HOST}}/${{vars.DOCKER_REGISTRY_REPOSITORY_NAME}}:${{ needs.build.outputs.release_version }}
