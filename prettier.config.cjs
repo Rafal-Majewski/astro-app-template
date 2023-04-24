@@ -8,5 +8,5 @@ module.exports = {
 	semi: true,
 	bracketSpacing: false,
 	quoteProps: "preserve",
-	plugins: [],
+	plugins: ["prettier-plugin-astro"],
 };
