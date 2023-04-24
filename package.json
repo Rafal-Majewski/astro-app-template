@@ -6,6 +6,8 @@
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
+		"build:check": "astro check && tsc --noEmit",
+		"astro:check": "astro check",
 		"preview": "astro preview",
 		"test": "vitest --run --passWithNoTests --coverage",
 		"compile": "tsc",
