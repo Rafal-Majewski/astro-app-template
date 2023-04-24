@@ -1,15 +1,11 @@
 {
-	"name": "nodejs-app-template",
-	"version": "1.7.1",
-	"description": "Node.js app template",
-	"private": false,
-	"main": "./dist/src/main.js",
+	"name": "astro-app-template",
+	"version": "0.0.0",
+	"description": "Astro.js app template",
+	"private": true,
 	"scripts": {
-		"start": "node ./dist/src/main.js",
 		"test": "vitest --run --passWithNoTests --coverage",
 		"compile": "tsc",
-		"dev": "ts-node-esm ./src/main.ts",
-		"dev:watch": "nodemon --watch ./src --exec ts-node-esm ./src/main.ts",
 		"vitest:check": "vitest --run --passWithNoTests --coverage",
 		"vitest:check:watch": "vitest --watch --passWithNoTests --coverage",
 		"prettier:fix": "prettier --write .",
@@ -26,24 +22,22 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/Rafal-Majewski/nodejs-app-template.git"
+		"url": "git+https://github.com/Rafal-Majewski/astro-app-template.git"
 	},
 	"author": "Rafał Majewski",
 	"license": "CC0-1.0",
 	"bugs": {
-		"url": "https://github.com/Rafal-Majewski/nodejs-app-template/issues"
+		"url": "https://github.com/Rafal-Majewski/astro-app-template/issues"
 	},
-	"homepage": "https://github.com/Rafal-Majewski/nodejs-app-template#readme",
+	"homepage": "https://github.com/Rafal-Majewski/astro-app-template#readme",
 	"devDependencies": {
 		"@types/node": "^18.15.11",
 		"@typescript-eslint/eslint-plugin": "^5.57.1",
 		"@typescript-eslint/parser": "^5.57.1",
 		"@vitest/coverage-c8": "^0.29.3",
 		"eslint": "^8.37.0",
-		"nodemon": "^2.0.22",
 		"prettier": "^2.8.7",
 		"release-it": "^15.9.0",
-		"ts-node": "^10.9.1",
 		"typescript": "^5.0.3",
 		"vitest": "^0.30.1"
 	},
