@@ -36,7 +36,7 @@
 	},
 	"homepage": "https://github.com/Rafal-Majewski/astro-app-template#readme",
 	"devDependencies": {
-		"@types/node": "^18.16.0",
+		"@types/node": "^20.1.5",
 		"@typescript-eslint/eslint-plugin": "^5.57.1",
 		"@typescript-eslint/parser": "^5.59.0",
 		"@vitest/coverage-c8": "^0.29.3",
